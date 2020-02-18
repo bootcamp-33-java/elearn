@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
                                     <div class="news_post_text">
-                                        <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum. Etiam eu purus nec eros varius luctus. Praesent finibus risus facilisis ultricies.</p>
+                                        <p><%=t.getTheoryDefiniton() %></p>
                                     </div>
                                     <div class="news_post_button text-center trans_200">
                                         <a href="theory_detail?id=<%=t.getId()%>">Read More</a>

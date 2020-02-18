@@ -27,6 +27,7 @@
             response.sendRedirect("addtheory");
         } else {
             List<StudyClass> classes = (List<StudyClass>) session.getAttribute("classes");
+            String nama = (String) session.getAttribute("namaTrainer");
     %>
     <body>
 
@@ -97,22 +98,22 @@
                                 <div class="contact_title">Add Theory</div>
 
                                 <div class="contact_form_container">
-                                    <form action="theory" method="POST">
+                                    <form action="addtheory" method="POST">
                                         <label>Title</label>
-                                        <input id="contact_form_name" class="input_field contact_form_name" name="title" type="text"required="required" data-error="Name is required.">
+                                        <input class="input_field contact_form_name" name="title" type="text"required="required" data-error="Name is required.">
                                         <label>Definition</label>
-                                        <textarea id="contact_form_message" class="text_field contact_form_message" name="definition" required="required" data-error="Please, write us a message."></textarea>
+                                        <textarea class="text_field contact_form_message" name="definition" required="required" data-error="Please, write us a message."></textarea>
                                         <label>Upload file:</label>
-                                        <input id="contact_form_name" class="input_field contact_form_name" name="filenya" type="file" required="required" data-error="Name is required." style="padding:4px">
+                                        <input class="input_field contact_form_name" name="file" type="file" required="required" data-error="Name is required." style="padding:4px">
+                                        <input name="creator" type="hidden" value="<%=request.getSession().getAttribute("idTrainer")%>">
                                         <label>Materi: </label>
-                                        <select class="form-control" name="kelas" >
+                                        <select class="form-control" name="class">
                                             <% for (StudyClass c : classes) {%>
                                             <option value="<%=c.getId()%>"><%=c.getName()%></option>
                                             <% } %>
-
                                         </select>
                                         <br>
-                                        <button id="contact_send_btn" type="button" class="contact_send_btn trans_200" value="Submit">Tambah theory</button>
+                                        <button type="submit" class="contact_send_btn trans_200" value="SAVE">Tambah theory</button>
                                     </form>
                                 </div>
                             </div>

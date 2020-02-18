@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
     private EmployeeDAO<Employee> empdao = new EmployeeDAO<>(HibernateUtil.getSessionFactory(), Employee.class);
     EmpRoleDAO<EmployeeRole> erdao = new EmpRoleDAO<>(HibernateUtil.getSessionFactory(), EmployeeRole.class);
     String role;
+    String idTrainer;
     private Employee employee;
 
     /**
@@ -59,6 +60,8 @@ public class LoginServlet extends HttpServlet {
             } else if (role.equals("Student") || role.equals("Trainer")) {
                 request.getSession().setAttribute("employee", employee);
                 request.getSession().setAttribute("role", role);
+//                idTrainer = "a";    
+                request.getSession().setAttribute("idTrainer", idTrainer);
                 response.sendRedirect("index.jsp");
             } else {
                 RequestDispatcher rd;
@@ -84,9 +87,8 @@ public class LoginServlet extends HttpServlet {
         role = "";
         token = request.getParameter("token");
         PrintWriter out = response.getWriter();
-
         //verifikasi account
-//        Account account = accountDAO.getByToken(token);
+        //Account account = accountDAO.getByToken(token);
         try {
             Account account = accountDAO.getByToken(token);
             if (account != null) {
@@ -103,8 +105,7 @@ public class LoginServlet extends HttpServlet {
             }
 //            Account accountSave = new Account(account.getId(), token, 0, token, employee);
 //            accountDAO.saveOrDelete(employees, true);
-
-        processRequest(request, response);
+            processRequest(request, response);
         } catch (Exception e) {
 
         }
@@ -126,6 +127,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         try {
             employee = empdao.getByEmail(email);
+            idTrainer = employee.getId();
             if (employee != null) {
                 Account a = accountDAO.getById(employee.getId());
                 if (BCrypt.checkpw(password, a.getPassword())) {

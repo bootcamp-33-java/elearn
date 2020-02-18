@@ -38,8 +38,10 @@ public class GeneralDAO<T> implements IGeneralDAO<T> {
 
     /**
      * Untuk search dan get all
-     * @param key jika null maka dia melakukan get all jika tidak null maka dia search
-     * @return 
+     *
+     * @param key jika null maka dia melakukan get all jika tidak null maka dia
+     * search
+     * @return
      */
     @Override
     public List<T> getData(Object key) {
@@ -47,15 +49,15 @@ public class GeneralDAO<T> implements IGeneralDAO<T> {
         session = this.sessionFactory.openSession();
         transaction = session.beginTransaction();
         try {
-            String hql = "FROM " + t.getClass().getSimpleName() + (key == null ? "   " : " WHERE "); 
+            String hql = "FROM " + t.getClass().getSimpleName() + (key == null ? "   " : " WHERE ");
             for (Field field : t.getClass().getDeclaredFields()) {
                 System.out.println(field.getName());
                 if (!field.getName().matches(".*(List|UID)") && key != null) {
-                    hql = hql + "LOWER(" + field.getName() + ") LIKE '%"+ key+ "%' OR ";
+                    hql = hql + "LOWER(" + field.getName() + ") LIKE '%" + key + "%' OR ";
                 }
                 //FROM Region LOWER(id) like %keyword% OR lower name ........... OR
             }
-            hql = hql.substring(0,hql.length()-3);//FROM Region LOWER(id) like %keyword% OR lower name ........... untuk membuang ORnya.
+            hql = hql.substring(0, hql.length() - 3);//FROM Region LOWER(id) like %keyword% OR lower name ........... untuk membuang ORnya.
             hql = hql + " ORDER BY 1";
             System.out.println(hql);
             Query query = session.createQuery(hql);
@@ -65,7 +67,7 @@ public class GeneralDAO<T> implements IGeneralDAO<T> {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }finally{
+        } finally {
             session.close();
         }
         return ts;
@@ -101,12 +103,33 @@ public class GeneralDAO<T> implements IGeneralDAO<T> {
             transaction = session.beginTransaction();
             System.out.println(t.hashCode());
             System.out.println(t.getClass().getSimpleName());
-            
+
             if (isDelete) {
                 session.delete(t);
             } else {
                 session.saveOrUpdate(t); //insert & update & delete
             }
+            transaction.commit();
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+    public boolean insert(T t) {
+        boolean result = false;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            System.out.println(t.hashCode());
+            System.out.println(t.getClass().getSimpleName());
+            session.save(t); //insert & update & delete
             transaction.commit();
             result = true;
         } catch (Exception e) {

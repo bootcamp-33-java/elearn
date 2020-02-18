@@ -59,8 +59,8 @@ public class ManualTestGeneral {
 //        AccountDAO<Account> accountDao = new AccountDAO<>(sessionFactory, Account.class);
         // ---------------------------------------- Testing  ----------------------------------------//       
 //        Get By ID
-        EmployeeRole e = erdao.getByEmployee("16454");
-        System.out.println(e.getRole().getName());
+        Employee e = edao.getById("14422");
+        System.out.println(e.getName());
 //        System.out.println(account.getPassword());
 ////        System.out.println(department.getManagerial() == null ? "0" : department.getManagerial().getId());
 ////        System.out.println(department.getLocation().getId());

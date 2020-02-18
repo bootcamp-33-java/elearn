@@ -7,7 +7,6 @@
 <%@page import="models.Role"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header class="header d-flex flex-row">
-
     <div class="header_content d-flex flex-row align-items-center">
         <!-- Logo -->
         <div class="logo_container">
@@ -30,7 +29,7 @@
                     <li class="main_nav_item"><a href = "#" data-toggle = "modal" data-target = "#LoginModal">Login</a></li>
 
                     <% } else {%>
-                    <li class="main_nav_item"><a href="theory_list">theory</a></li>
+                    <li class="main_nav_item"><a href="theory_list?id=<%=session.getAttribute("idTrainer")%>">theory</a></li>
                     
                     <li class="main_nav_item"><a href="forum">forum</a></li>
                     <li class="main_nav_item"><a href="contact.html">contact</a></li>

@@ -28,7 +28,6 @@
     </head>
     <body>
         <div class="super_container">
-
             <!-- Header -->
             <%@include file="header_student.jsp" %>
             <!-- Menu -->
