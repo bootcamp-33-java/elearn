@@ -7,6 +7,7 @@
 <%@page import="models.Role"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header class="header d-flex flex-row">
+
     <div class="header_content d-flex flex-row align-items-center">
         <!-- Logo -->
         <div class="logo_container">
@@ -15,18 +16,26 @@
                 <span>course</span>
             </div>
         </div>
-
         <!-- Main Navigation -->
         <nav class="main_nav_container">
             <div class="main_nav">
                 <ul class="main_nav_list">
-                    
+
                     <li class="main_nav_item"><a href="index">home</a></li>
                     <li class="main_nav_item"><a href="#">about us</a></li>
-                    <li class="main_nav_item"><a href="theory_list">theory</a></li>
-                    <li class="main_nav_item"><a href="forum">forum</a></li>
+
+
+                    <% if (session.getAttribute("role") == null) { %> 
                     <li class="main_nav_item"><a href="contact.html">contact</a></li>
                     <li class="main_nav_item"><a href = "#" data-toggle = "modal" data-target = "#LoginModal">Login</a></li>
+
+                    <% } else {%>
+                    <li class="main_nav_item"><a href="theory_list">theory</a></li>
+                    
+                    <li class="main_nav_item"><a href="forum">forum</a></li>
+                    <li class="main_nav_item"><a href="contact.html">contact</a></li>
+                    <li class="main_nav_item"><a href = "logout" >Logout</a></li>
+                        <%}%>
                 </ul>
             </div>
         </nav>

@@ -4,13 +4,13 @@
     Author     : TUF FX504
 --%>
 
+<%@page import="models.Account"%>
 <%@page import="models.Role"%>
 <%@page import="models.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%String pathWebcontent=request.getContextPath();%>
         <title>E-Learning Bootcamp</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -571,8 +571,7 @@
         <script src="plugins/scrollTo/jquery.scrollTo.min.js"></script>
         <script src="plugins/easing/easing.js"></script>
         <script src="js/custom.js"></script>
-
+        <script src= 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'> </script>
     </body>
-    
 </html>
 

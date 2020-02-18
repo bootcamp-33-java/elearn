@@ -52,17 +52,20 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getSession().setAttribute("employee", employee);
-            //mendapatkan role
-            request.getSession().setAttribute("role", role);
-            if (role.equals("Trainer") || role.equals("Admin")) {
-                RequestDispatcher rd = request.getRequestDispatcher("dashboard");
+            if (role.equals("Admin")) {
+                request.getSession().setAttribute("employee", employee);
+                request.getSession().setAttribute("role", role);
+                response.sendRedirect("dashboard.jsp");
+            } else if (role.equals("Student") || role.equals("Trainer")) {
+                request.getSession().setAttribute("employee", employee);
+                request.getSession().setAttribute("role", role);
+                response.sendRedirect("index.jsp");
+            } else {
+                RequestDispatcher rd;
+                rd = request.getRequestDispatcher("index.jsp");
                 rd.include(request, response);
-            } else if (role.equals("Student")) {
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.include(request, response);
+                response.sendRedirect("index.jsp");
             }
-
         }
     }
 
@@ -78,6 +81,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        role = "";
         token = request.getParameter("token");
         PrintWriter out = response.getWriter();
 
@@ -99,10 +103,11 @@ public class LoginServlet extends HttpServlet {
             }
 //            Account accountSave = new Account(account.getId(), token, 0, token, employee);
 //            accountDAO.saveOrDelete(employees, true);
+
+        processRequest(request, response);
         } catch (Exception e) {
 
         }
-        processRequest(request, response);
     }
 
     /**
@@ -130,16 +135,11 @@ public class LoginServlet extends HttpServlet {
                         role = "Admin";
                     } else if (erdao.getByEmployee(employee.getId()).getRole().getName().equals("Student")) {
                         role = "Student";
+                    } else {
+                        role = "Gagal";
                     }
-                    out.println("<script src= 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'> </script>");
-                    out.println("<script src= 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    out.println("<script src= 'https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>");
-                    out.println("<script>");
-                    out.println("$(document).ready(function(){");
-                    out.println("swal ('Sukses !', 'Berhasil login!', 'success');");
-                    out.println("});");
-                    out.println("</script>");
                 } else {
+                    role = "Gagal";
                     out.println("<script src= 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'> </script>");
                     out.println("<script src= 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                     out.println("<script src= 'https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>");
@@ -150,9 +150,10 @@ public class LoginServlet extends HttpServlet {
                     out.println("</script>");
                 }
             }
+            processRequest(request, response);
         } catch (Exception e) {
         }
-        processRequest(request, response);
+
     }
 
     /**
