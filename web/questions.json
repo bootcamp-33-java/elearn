@@ -1,0 +1,26 @@
+[
+  {
+    "question": "A?",
+    "choice1": "aaa",
+    "choice2": "bbb",
+    "choice3": "ccc",
+    "choice4": "ddd",
+    "answer": 1
+  },
+  {
+    "question": "B?",
+    "choice1": "aaa",
+    "choice2": "bbb",
+    "choice3": "ccc",
+    "choice4": "dddd",
+    "answer": 2
+  },
+  {
+    "question": " How do you write 'Hello World' in an alert box?",
+    "choice1": "msgBox('Hello World');",
+    "choice2": "alertBox('Hello World');",
+    "choice3": "msg('Hello World');",
+    "choice4": "alert('Hello World');",
+    "answer": 4
+  }
+]

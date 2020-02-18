@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="e_learningPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>models.Employee</class>
+    <class>models.Role</class>
+    <class>models.EmployeeRole</class>
+    <class>models.Account</class>
+    <class>models.EmpAnswer</class>
+    <class>models.Theory</class>
+    <class>models.Question</class>
+    <class>models.EmpBundleAnswer</class>
+    <class>models.EmpJoin</class>
+    <class>models.EmpAction</class>
+    <class>models.StudyClass</class>
+    <class>models.Batch</class>
+    <class>models.QuestionServlet</class>
+    <class>models.AnswerQuestion</class>
+    <class>models.Forum</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+      <property name="javax.persistence.jdbc.user" value="e_learning"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="makankuy"/>
+    </properties>
+  </persistence-unit>
+</persistence>
