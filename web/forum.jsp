@@ -21,6 +21,26 @@
         <link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="styles/news_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/news_responsive.css">
+        <style>.act-btn{
+                background:green;
+                display: block;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                color: white;
+                font-size: 30px;
+                font-weight: bold;
+                border-radius: 50%;
+                -webkit-border-radius: 50%;
+                text-decoration: none;
+                transition: ease all 0.3s;
+                position: fixed;
+                right: 30px;
+                bottom:30px;
+            }
+            .act-btn:hover{background: blue}
+        </style>
     </head>
     <% // //script plate
         if (session.getAttribute("forumsession") == null) {
@@ -64,7 +84,7 @@
                                     </div>
                                     <div class="news_post_title_container">
                                         <div class="news_post_title">
-                                            <a href="forumdetail?id=<%=empa.getForum().getId() %>"><%=empa.getForum().getTopic()%></a>
+                                            <a href="forumdetail?id=<%=empa.getForum().getId()%>"><%=empa.getForum().getTopic()%></a>
                                         </div>
                                         <div class="news_post_meta">
                                             <span class="news_post_author"><a href="#">By <%=empa.getEmployee().getName()%></a></span>
@@ -97,7 +117,11 @@
                     </div>
 
                     <!-- Sidebar Column -->
-
+                    <% if (session.getAttribute("role").equals("Trainer")) {%>
+                    <a href="addforum" class="act-btn">
+                        +
+                    </a>
+                    <% }%>
 
                 </div>
             </div>

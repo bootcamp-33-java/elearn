@@ -5,35 +5,20 @@
  */
 package controllers;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
-import daos.EmployeeDAO;
-import daos.GeneralDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Employee;
-import models.StudyClass;
-import models.Theory;
-import tools.HibernateUtil;
 
 /**
  *
  * @author BWP
  */
-@WebServlet(name = "AddTeoryServlet", urlPatterns = {"/addtheory"})
-public class AddTheoryServlet extends HttpServlet {
-
-    private GeneralDAO<StudyClass> scdao = new GeneralDAO<>(HibernateUtil.getSessionFactory(), StudyClass.class);
-    private EmployeeDAO<Employee> empdao = new EmployeeDAO<>(HibernateUtil.getSessionFactory(), Employee.class);
-    private GeneralDAO<Theory> thedao = new GeneralDAO<>(HibernateUtil.getSessionFactory(), Theory.class);
-    private final String UPLOAD_DIRECTORY = "D:/METRO DATA/ProjectWEB/elearn/web/file";
+@WebServlet(name = "AddForumServlet", urlPatterns = {"/addforum"})
+public class AddForumServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,13 +33,9 @@ public class AddTheoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //membuat session class
-            request.getSession().setAttribute("classes", scdao.getData(null));
-            //membuat session untuk nama creator
-            Employee e = empdao.getById(request.getSession().getAttribute("idTrainer").toString());
-            request.setAttribute("namaTrainer", e.getName());
-            response.sendRedirect("add_theory.jsp");
-
+            response.sendRedirect("addforum.jsp");
+            /* TODO output your page here. You may use following sample code. */
+            
         }
     }
 
@@ -84,18 +65,6 @@ public class AddTheoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String title = request.getParameter("title");
-        String definition = request.getParameter("definition");
-        String file = request.getParameter("file");
-        String creator = request.getParameter("creator");
-        String classs = request.getParameter("class");
-        Theory theory = new Theory(0, title, definition, file, new Employee(creator), new StudyClass(new Integer(classs)));
-        try {
-            thedao.insert(theory);
-        } catch (Exception e) {
-        }
-
         processRequest(request, response);
     }
 

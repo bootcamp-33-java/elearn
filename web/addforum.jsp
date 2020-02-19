@@ -10,12 +10,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Course - Contact</title>
+        <title>Add Forum</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Course Project">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
@@ -95,24 +94,15 @@
 
                             <!-- Contact Form -->
                             <div class="contact_form">
-                                <div class="contact_title">Add Theory</div>
+                                <div class="contact_title">Add Forum</div>
 
                                 <div class="contact_form_container">
                                     <!--<form action="addtheory" method="POST" enctype="multipart/form-data">-->
-                                    <form action="addtheory" method="POST">
-                                        <label>Title</label>
-                                        <input class="input_field contact_form_name" name="title" type="text"required="required" data-error="Name is required.">
-                                        <label>Definition</label>
+                                    <form action="addforum" method="POST">
+                                        <label>Topic</label>
+                                        <input class="input_field contact_form_name" name="topic" type="text"required="required" data-error="Name is required.">
+                                        <label>Forum Description:</label>
                                         <textarea class="text_field contact_form_message" name="definition" required="required" data-error="Please, write us a message."></textarea>
-                                        <label>Upload file:</label>
-                                        <input class="input_field contact_form_name" name="file" type="file" required="required" data-error="Name is required." style="padding:4px">
-                                        <input name="creator" type="hidden" value="<%=request.getSession().getAttribute("idTrainer")%>">
-                                        <label>Materi: </label>
-                                        <select class="form-control" name="class">
-                                            <% for (StudyClass c : classes) {%>
-                                            <option value="<%=c.getId()%>"><%=c.getName()%></option>
-                                            <% } %>
-                                        </select>
                                         <br>
                                         <button type="submit" class="contact_send_btn trans_200" value="upload">Tambah theory</button>
                                     </form>
